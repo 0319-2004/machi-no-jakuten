@@ -6,7 +6,7 @@
 
 ## 公開アプリ
 
-**[街の弱点を開く](https://machi-no-jakuten.ritosuper.chatgpt.site/)**
+**[街の弱点を開く](https://0319-2004.github.io/machi-no-jakuten/)**
 
 ## 主な機能
 
