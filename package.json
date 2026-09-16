@@ -8,9 +8,13 @@
   "scripts": {
     "dev": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext dev",
     "build": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext build",
+    "build:pages": "GITHUB_PAGES_BUILD=true NEXT_PUBLIC_BASE_PATH=/machi-no-jakuten NEXT_PUBLIC_SHINSUI_API_URL=https://machi-no-jakuten-shinsui-api.ritoyamasaki.workers.dev/api/shinsui next build",
+    "build:shinsui": "WRANGLER_LOG_PATH=.wrangler/wrangler-shinsui.log wrangler deploy --dry-run --env=\"\" --config wrangler.shinsui.jsonc --outdir dist/shinsui-worker",
     "start": "WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext start",
-    "test": "node --experimental-strip-types --test tests/risk.test.ts tests/shinsui-route.test.ts && npm run build && node --test tests/rendered-html.test.mjs",
-    "test:risk": "node --experimental-strip-types --test tests/risk.test.ts tests/shinsui-route.test.ts"
+    "test": "node --experimental-strip-types --test tests/risk.test.ts tests/shinsui-route.test.ts tests/shinsui-worker.test.ts && npm run build && node --test tests/rendered-html.test.mjs",
+    "test:risk": "node --experimental-strip-types --test tests/risk.test.ts tests/shinsui-route.test.ts tests/shinsui-worker.test.ts",
+    "test:shinsui-worker": "node --experimental-strip-types --test tests/shinsui-worker.test.ts",
+    "test:pages": "npm run build:pages && node --test tests/static-pages.test.mjs"
   },
   "dependencies": {
     "next": "16.2.6",
@@ -23,6 +27,8 @@
     "@vitejs/plugin-react": "6.0.2",
     "@vitejs/plugin-rsc": "0.5.26",
     "react-server-dom-webpack": "19.2.6",
+    "@types/react": "19.3.0",
+    "typescript": "5.9.3",
     "vinext": "0.0.50",
     "vite": "8.0.13",
     "wrangler": "4.92.0"

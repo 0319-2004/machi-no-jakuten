@@ -1,0 +1,30 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "machi-no-jakuten-shinsui-api",
+  "main": "worker/shinsui/index.ts",
+  "compatibility_date": "2026-05-15",
+  "observability": {
+    "enabled": true
+  },
+  "vars": {
+    // Production uses exact origins only. The Worker code also permanently
+    // includes the GitHub Pages and current chatgpt.site migration origins.
+    "ALLOWED_ORIGINS": ""
+  },
+  "env": {
+    "development": {
+      "name": "machi-no-jakuten-shinsui-api-development",
+      "vars": {
+        "ALLOWED_ORIGINS": "http://localhost:3000,http://localhost:4173,http://localhost:5173,http://127.0.0.1:3000,http://127.0.0.1:4173,http://127.0.0.1:5173"
+      }
+    },
+    "preview": {
+      "name": "machi-no-jakuten-shinsui-api-preview",
+      "vars": {
+        // Add an exact frontend preview origin here (or override this var for
+        // the preview upload) when a separate Cloudflare frontend preview is used.
+        "ALLOWED_ORIGINS": "http://localhost:3000,http://localhost:4173,http://localhost:5173,http://127.0.0.1:3000,http://127.0.0.1:4173,http://127.0.0.1:5173"
+      }
+    }
+  }
+}

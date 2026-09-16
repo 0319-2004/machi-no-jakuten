@@ -895,6 +895,8 @@ export default function CesiumFloodView({
       return;
     }
 
+    const cesium = Cesium;
+
     let cancelled = false;
     setGridStatus("loading");
     const mobile = window.matchMedia("(max-width: 620px)").matches;
@@ -963,10 +965,10 @@ export default function CesiumFloodView({
         for (let index = 0; index < uncached.length; index += 500) {
           const chunk = uncached.slice(index, index + 500);
           const cartographics = chunk.map(({ point }) =>
-            Cesium.Cartographic.fromDegrees(point.lng, point.lat),
+            cesium.Cartographic.fromDegrees(point.lng, point.lat),
           );
           try {
-            const sampled = await Cesium.sampleTerrainMostDetailed(
+            const sampled = await cesium.sampleTerrainMostDetailed(
               terrainProviderRef.current,
               cartographics,
             );
@@ -996,9 +998,9 @@ export default function CesiumFloodView({
           (111_320 * Math.max(0.1, Math.cos((point.lat * Math.PI) / 180)));
         const key = `${point.lat.toFixed(6)},${point.lng.toFixed(6)}`;
         const cellGroundHeight = groundHeightCacheRef.current.get(key) ?? 0;
-        return new Cesium.GeometryInstance({
-          geometry: new Cesium.RectangleGeometry({
-            rectangle: Cesium.Rectangle.fromDegrees(
+        return new cesium.GeometryInstance({
+          geometry: new cesium.RectangleGeometry({
+            rectangle: cesium.Rectangle.fromDegrees(
               Math.max(selectedBounds.west, point.lng - halfLongitude),
               Math.max(selectedBounds.south, point.lat - halfLatitude),
               Math.min(selectedBounds.east, point.lng + halfLongitude),
@@ -1006,20 +1008,20 @@ export default function CesiumFloodView({
             ),
             height: cellGroundHeight,
             extrudedHeight: cellGroundHeight + cellDepth,
-            vertexFormat: Cesium.PerInstanceColorAppearance.VERTEX_FORMAT,
+            vertexFormat: cesium.PerInstanceColorAppearance.VERTEX_FORMAT,
           }),
           attributes: {
-            color: Cesium.ColorGeometryInstanceAttribute.fromColor(
-              Cesium.Color.fromBytes(color[0], color[1], color[2], 132),
+            color: cesium.ColorGeometryInstanceAttribute.fromColor(
+              cesium.Color.fromBytes(color[0], color[1], color[2], 132),
             ),
           },
         });
       });
 
       if (cancelled || gridRequestRef.current !== requestId || viewer.isDestroyed()) return;
-      const primitive = new Cesium.Primitive({
+      const primitive = new cesium.Primitive({
         geometryInstances: instances,
-        appearance: new Cesium.PerInstanceColorAppearance({
+        appearance: new cesium.PerInstanceColorAppearance({
           translucent: true,
           closed: true,
         }),

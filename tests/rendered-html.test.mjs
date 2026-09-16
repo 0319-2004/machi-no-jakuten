@@ -33,7 +33,7 @@ test("高島平・舟渡水害編の主要画面をサーバー描画する", as
 });
 
 test("3Dの地図表示と立体表示の違いを操作時に案内する", async () => {
-  const source = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
+  const source = await readFile(new URL("../app/FloodPageClient.tsx", import.meta.url), "utf8");
   assert.match(source, /浸水の見せ方を選ぶ/);
   assert.match(source, /公式地図を重ねる/);
   assert.match(source, /水深を立体で見る（概算）/);
@@ -43,7 +43,7 @@ test("3Dの地図表示と立体表示の違いを操作時に案内する", asy
 });
 
 test("診断の根拠をモード別に分け、決壊地点を2Dと3Dで案内する", async () => {
-  const pageSource = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
+  const pageSource = await readFile(new URL("../app/FloodPageClient.tsx", import.meta.url), "utf8");
   const cesiumSource = await readFile(new URL("../app/CesiumFloodView.tsx", import.meta.url), "utf8");
   assert.match(pageSource, /buildFrequencyHeadline/);
   assert.match(pageSource, /buildTimeHeadline/);
@@ -59,7 +59,7 @@ test("診断の根拠をモード別に分け、決壊地点を2Dと3Dで案内�
 test("データ制約と免責を表示する", async () => {
   const response = await render();
   const html = await response.text();
-  const source = await readFile(new URL("../app/page.tsx", import.meta.url), "utf8");
+  const source = await readFile(new URL("../app/FloodPageClient.tsx", import.meta.url), "utf8");
   assert.match(source, /この表示だけでは、浸水なしとは判断できません/);
   assert.match(html, /class="rain"/);
   assert.doesNotMatch(html, /降雨量を再現したものではありません/);
