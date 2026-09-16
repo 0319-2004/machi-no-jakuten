@@ -11,7 +11,6 @@
 ### 公開アプリ
 
 - **GitHub Pages（現在の公開サイト）:** [街の弱点を開く](https://0319-2004.github.io/machi-no-jakuten/)
-- **従来版（ロールバック用に維持）:** [chatgpt.site版を開く](https://machi-no-jakuten.ritosuper.chatgpt.site/)
 - **浸水ナビAPI Worker:** [Cloudflare Worker](https://machi-no-jakuten-shinsui-api.ritoyamasaki.workers.dev/api/shinsui)
 
 ### 主な機能
@@ -124,7 +123,6 @@ This web project explores flood depth, onset, and duration at selected locations
 ### Live applications
 
 - **GitHub Pages (current public site):** [Open Machi no Jakuten](https://0319-2004.github.io/machi-no-jakuten/)
-- **Previous deployment (kept as a rollback target):** [Open the chatgpt.site version](https://machi-no-jakuten.ritosuper.chatgpt.site/)
 - **Shinsui API Worker:** [Cloudflare Worker](https://machi-no-jakuten-shinsui-api.ritoyamasaki.workers.dev/api/shinsui)
 
 ### Features
